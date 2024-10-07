@@ -1,6 +1,9 @@
 import React from 'react';
 import { useLoaderData, useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { getBooks, saveBooks } from '../utility/LocalStorage';
 
 const BookDetails = () => {
 
@@ -9,15 +12,56 @@ const BookDetails = () => {
 
     const intId = parseInt(bookId);
 
-    console.log(datas);
-    console.log(intId);
-
     const book = datas.find(data => data.bookId === intId);
 
-
-
-
     const { bookName, review, author, category, image, description, rating, totalPages, yearOfPublishing, publisher, tags } = book;
+
+
+    const handleAddToReadsBook = () => {
+        const allReadySavedBooks = getBooks('readsbook');
+        const book = allReadySavedBooks.find(id => id === intId);
+        if (!book) {
+            saveBooks('readsbook', intId);
+            toast("Book Added to Read list");
+        }
+        else {
+            toast.error("This book Already Added to Read list");
+        }
+
+
+    }
+
+    const handleAddToWishesList = () => {
+
+        const allReadySavedBooks = getBooks('readsbook');
+        const book = allReadySavedBooks.find(id => id === intId);
+        if (book) {
+
+            toast.error("You Have Already Read this Books");
+        }
+
+        else {
+
+            const allReadWhishesBooks = getBooks('whishesbooks');
+            const book = allReadWhishesBooks.find(id => id === intId);
+
+            if (!book) {
+                saveBooks('whishesbooks', intId);
+                toast("Book Added to Whishes list");
+            }
+            else {
+                toast.error("This book Already Added to Read list");
+            }
+
+
+        }
+
+    }
+
+
+
+
+
 
     return (
 
@@ -60,11 +104,13 @@ const BookDetails = () => {
                         </div>
                     </div>
                     <div className='Work-Sans flex gap-5'>
-                        <Link><button className="px-7 text-black font-semibold py-3 border border-gray-400 rounded-md  hover:bg-[#50B1C9] hover:text-white">Read</button></Link>
+                        <Link><button onClick={handleAddToReadsBook} className="px-7 text-black font-semibold py-3 border border-gray-400 rounded-md  hover:bg-[#23BE0A] hover:text-white">Read</button></Link>
 
                         <Link>
-                            <button className="px-7 text-black font-semibold py-3 border border-gray-400 rounded-md  hover:bg-[#50B1C9] hover:text-white">Wishlist</button>
+                            <button onClick={handleAddToWishesList} className="px-7 text-black font-semibold py-3 border border-gray-400 rounded-md  hover:bg-[#50B1C9] hover:text-white">Wishlist</button>
                         </Link>
+
+                        <ToastContainer />
 
                     </div>
                 </div>

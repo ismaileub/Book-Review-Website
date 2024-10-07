@@ -15,7 +15,7 @@ const Book = ({ data }) => {
         <Link to={`/${bookId}`}>
             <div className="flex flex-col card card-compact p-6 border rounded-lg shadow-xl space-y-4">
                 <figure>
-                    <img className='w-[300px] h-[250px]' src={image} alt={bookName} />
+                    <img className='w-[300px] rounded-md h-[250px]' src={image} alt={bookName} />
                 </figure>
                 <div className="space-y-4">
                     <div className='flex Work-Sans font-medium gap-4 text-[#23BE0A]'>
