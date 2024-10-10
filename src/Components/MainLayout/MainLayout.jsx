@@ -6,10 +6,10 @@ import Footer from '../Footer/Footer';
 const MainLayout = () => {
     return (
         <div>
-            <div className='container mx-auto px-12'>
+            <div className='container mx-auto p-2  lg:px-12'>
                 <NavBar></NavBar>
             </div>
-            <main className='container mx-auto px-12' >
+            <main className='container mx-auto p-2 lg:px-12' >
                 <Outlet></Outlet>
             </main>
 

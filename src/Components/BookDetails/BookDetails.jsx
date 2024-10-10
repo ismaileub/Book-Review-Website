@@ -68,18 +68,18 @@ const BookDetails = () => {
         <div className="mt-12 mb-5 overflow-hidden ">
             <div className=" flex  gap-10 flex-col lg:flex-row">
 
-                <div className='flex-1 grid items-center rounded-lg p-16 bg-[#1313130D]'>
+                <div className='flex-1 grid items-center rounded-lg p-4 lg:p-16 bg-[#1313130D]'>
                     <img className='border rounded-lg '
                         src={image} />
                 </div>
 
-                <div className='flex-1 space-y-4'>
-                    <h1 className='text-4xl font-bold Playfair-Display text-black'>{bookName}</h1>
-                    <p className='font-medium Work-Sans text-xl text-black opacity-75'>By : {author}</p>
+                <div className='flex-1 space-y-4  text-center lg:text-left'>
+                    <h1 className=' text-xl lg:text-4xl font-bold Playfair-Display text-black'>{bookName}</h1>
+                    <p className='font-medium Work-Sans text-lg lg:text-xl text-black opacity-75'>By : {author}</p>
                     <hr />
                     <p className="Work-Sans"> {category} </p>
                     <hr />
-                    <div className="Work-Sans "><span ><span className='font-bold'>Review </span>: <span className='opacity-70'>{review}</span></span></div>
+                    <div className="Work-Sans "><span ><span className='font-bold '>Review </span>: <span className='opacity-70'>{review}</span></span></div>
 
                     <div className="Work-Sans ">
                         <span className='font-bold'>Tag</span> <Link><span className='text-[#23BE0A] ml-5'>#{tags[0]}</span></Link>
@@ -88,7 +88,7 @@ const BookDetails = () => {
 
                     <hr />
 
-                    <div className='flex Work-Sans items-center'>
+                    <div className='flex gap-3 lg:gap-0 Work-Sans items-center text-left'>
                         <div className='flex-1 space-y-2'>
                             <h1>Number of Pages:</h1>
                             <h1>Publisher:</h1>
@@ -103,7 +103,7 @@ const BookDetails = () => {
                             <h1>{rating}</h1>
                         </div>
                     </div>
-                    <div className='Work-Sans flex gap-5'>
+                    <div className='Work-Sans flex gap-5 lg:justify-start justify-center items-center '>
                         <Link><button onClick={handleAddToReadsBook} className="px-7 text-black font-semibold py-3 border border-gray-400 rounded-md  hover:bg-[#23BE0A] hover:text-white">Read</button></Link>
 
                         <Link>

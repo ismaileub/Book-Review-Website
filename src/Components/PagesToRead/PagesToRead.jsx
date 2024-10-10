@@ -27,7 +27,7 @@ const PagesToRead = () => {
     const readBooks = books.filter(book => idOfReadBooks.includes(book.bookId));
 
     return (
-        <div className='bg-black bg-opacity-5 p-10 mt-8 flex justify-center items-center rounded-lg'>
+        <div className='bg-black bg-opacity-5  p-2 lg:p-10 mt-8 flex justify-center items-center rounded-lg'>
 
             <ResponsiveContainer width="100%" height={400}>
                 <BarChart

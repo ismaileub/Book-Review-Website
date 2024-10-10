@@ -1,38 +1,52 @@
-// src/Components/NavBar.js
-
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { FaRegUserCircle } from "react-icons/fa";
+import { FaBars } from "react-icons/fa6";
 
 const NavBar = () => {
+    const [dropdownOpen2, setDropdownOpen2] = useState(false);
+    const [dropdownOpen1, setDropdownOpen1] = useState(false);
+
+    const toggleDropdown1 = () => {
+        setDropdownOpen1(!dropdownOpen1);
+    };
+
+    const toggleDropdown2 = () => {
+        setDropdownOpen2(!dropdownOpen2);
+    };
+
     return (
         <div>
-            <div className="navbar bg-base-100 mt-10 items-center Work-Sans shadow-[rgba(0,0,0,0.1)_0px_2px_2px]">
+            <div className="navbar bg-base-100 mt-4 lg:mt-10 items-center Work-Sans shadow-[rgba(0,0,0,0.1)_0px_2px_2px]">
+
                 <div className="navbar-start">
-                    <div className="dropdown">
-                        <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-5 w-5"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M4 6h16M4 12h8m-8 6h16" />
-                            </svg>
+                    <div className="dropdown flex lg:hidden">
+                        <div className="relative">
+                            <div onClick={toggleDropdown1} className="cursor-pointer btn btn-ghost">
+                                <FaBars size={24} />
+                            </div>
+
+                            {dropdownOpen1 && (
+                                <div className="absolute left-0 mt-2 w-40 bg-white border rounded-lg shadow-lg z-10">
+                                    <ul className="text-center">
+                                        <NavLink to={'/'} className="block py-2 border-b hover:bg-gray-100">
+                                            Home
+                                        </NavLink>
+                                        <NavLink to={'/listedbooks'} className="block py-2 border-b hover:bg-gray-100">
+                                            Listed Books
+                                        </NavLink>
+                                        <NavLink to={'/pagestoread'} className="block py-2 hover:bg-gray-100">
+                                            Pages to Read
+                                        </NavLink>
+                                    </ul>
+                                </div>
+                            )}
                         </div>
-                        <ul
-                            tabIndex={0}
-                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                            <NavLink to={'/'}>Home</NavLink>
-                            <NavLink to={'/listedbooks'}>Listed Books</NavLink>
-                            <NavLink to={'/pagestoread'}>Pages to Read</NavLink>
-                        </ul>
                     </div>
-                    <a className="btn btn-ghost hover:bg-[#23BE0A] hover:text-white text-[#23BE0A] text-2xl font-bold ">Book Vibe</a>
+
+                    <NavLink to="/" className="btn btn-ghost hover:bg-[#23BE0A] hover:text-white text-[#23BE0A] text-2xl font-bold">Book Vibe</NavLink>
                 </div>
+
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1 gap-5 items-center font-semibold">
                         <NavLink
@@ -63,10 +77,39 @@ const NavBar = () => {
                         </NavLink>
                     </ul>
                 </div>
-                <div className="navbar-end gap-4 ">
-                    <a className="btn bg-[#23BE0A] text-white">Sign In</a>
-                    <a className="btn bg-[#59C6D2] text-white">Sign Up</a>
+
+                <div className="navbar-end">
+                    <div className='gap-4 hidden lg:flex'>
+                        <NavLink to="/signin" className="btn bg-[#23BE0A] text-white">
+                            Sign In
+                        </NavLink>
+                        <NavLink to="/signup" className="btn bg-[#59C6D2] text-white">
+                            Sign Up
+                        </NavLink>
+                    </div>
+
+                    <div className='flex lg:hidden'>
+                        <div className="relative">
+                            <div onClick={toggleDropdown2} className="cursor-pointer btn btn-ghost">
+                                <FaRegUserCircle size={24} />
+                            </div>
+
+                            {dropdownOpen2 && (
+                                <div className="absolute right-0 mt-2 w-40 bg-white border rounded-lg shadow-lg z-10">
+                                    <ul className="text-center">
+                                        <li className="py-2 border-b hover:bg-gray-100">
+                                            <NavLink to="/signin" className="block">Sign In</NavLink>
+                                        </li>
+                                        <li className="py-2 hover:bg-gray-100">
+                                            <NavLink to="/signup" className="block">Sign Up</NavLink>
+                                        </li>
+                                    </ul>
+                                </div>
+                            )}
+                        </div>
+                    </div>
                 </div>
+
             </div>
         </div>
     );

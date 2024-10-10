@@ -29,7 +29,7 @@ const ReadsBook = () => {
     }, [sortOption, books, idOfReadBooks]);
 
     return (
-        <div className='grid grid-cols-1 gap-6'>
+        <div className='grid lg:grid-cols-1 gap-2 lg:gap-6 overflow-hidden'>
             {filteredBooks.length > 0 ? (
                 filteredBooks.map((book) => (
                     <OneBook key={book.bookId} id={book.bookId} books={books} />
