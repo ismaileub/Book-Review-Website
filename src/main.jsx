@@ -1,3 +1,5 @@
+
+
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 import {
@@ -13,15 +15,17 @@ import PagesToRead from "./Components/PagesToRead/PagesToRead";
 import BookDetails from "./Components/BookDetails/BookDetails";
 import ReadsBook from "./Components/ReadsBook/ReadsBook";
 import WishlistBooks from "./Components/WishlistBooks/WishlistBooks";
+import ErrorPage from "./Components/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <MainLayout></MainLayout>,
+    element: <MainLayout />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: '/',
-        element: <Home></Home>,
+        element: <Home />,
         loader: async () => {
           const response = await fetch('/data.json');
           if (!response.ok) {
@@ -29,11 +33,10 @@ const router = createBrowserRouter([
           }
           return response.json();
         }
-
       },
       {
         path: '/listedbooks',
-        element: <ListedBooks></ListedBooks>,
+        element: <ListedBooks />,
         children: [
           {
             index: true,
@@ -41,7 +44,7 @@ const router = createBrowserRouter([
           },
           {
             path: 'readsbook',
-            element: <ReadsBook></ReadsBook>,
+            element: <ReadsBook />,
             loader: async () => {
               const response = await fetch('/data.json');
               if (!response.ok) {
@@ -49,11 +52,10 @@ const router = createBrowserRouter([
               }
               return response.json();
             }
-
           },
           {
-            path: 'wisheslist',
-            element: <WishlistBooks></WishlistBooks>,
+            path: 'wishlistbooks',
+            element: <WishlistBooks />,
             loader: async () => {
               const response = await fetch('/data.json');
               if (!response.ok) {
@@ -61,20 +63,12 @@ const router = createBrowserRouter([
               }
               return response.json();
             }
-
           }
         ]
-
-
-
       },
       {
         path: '/pagestoread',
-        element: <PagesToRead></PagesToRead>
-      },
-      {
-        path: '/:bookId',
-        element: <BookDetails></BookDetails>,
+        element: <PagesToRead />,
         loader: async () => {
           const response = await fetch('/data.json');
           if (!response.ok) {
@@ -83,9 +77,17 @@ const router = createBrowserRouter([
           return response.json();
         }
       },
-
-
-
+      {
+        path: '/:bookId',
+        element: <BookDetails />,
+        loader: async () => {
+          const response = await fetch('/data.json');
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        }
+      }
     ]
   },
 ]);
