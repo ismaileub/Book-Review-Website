@@ -38,10 +38,10 @@ const router = createBrowserRouter([
         path: '/listedbooks',
         element: <ListedBooks />,
         children: [
-          {
-            index: true,
-            element: <Navigate to="readsbook" />
-          },
+          // {
+          //   index: true,
+          //   element: <Navigate to="readsbook" />
+          // },
           {
             path: 'readsbook',
             element: <ReadsBook />,

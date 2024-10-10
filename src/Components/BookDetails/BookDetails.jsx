@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLoaderData, useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { getBooks, saveBooks } from '../utility/LocalStorage';
@@ -104,11 +104,14 @@ const BookDetails = () => {
                         </div>
                     </div>
                     <div className='Work-Sans flex gap-5 lg:justify-start justify-center items-center '>
-                        <Link><button onClick={handleAddToReadsBook} className="px-7 text-black font-semibold py-3 border border-gray-400 rounded-md  hover:bg-[#23BE0A] hover:text-white">Read</button></Link>
 
-                        <Link>
-                            <button onClick={handleAddToWishesList} className="px-7 text-black font-semibold py-3 border border-gray-400 rounded-md  hover:bg-[#50B1C9] hover:text-white">Wishlist</button>
-                        </Link>
+                        <NavLink onClick={handleAddToReadsBook} className="px-7 text-black font-semibold py-3 border border-gray-400 rounded-md  hover:bg-[#23BE0A] hover:text-white">
+                            Read
+                        </NavLink>
+
+                        <NavLink onClick={handleAddToWishesList} className="px-7 text-black font-semibold py-3 border border-gray-400 rounded-md  hover:bg-[#50B1C9] hover:text-white">
+                            Wishes
+                        </NavLink>
 
                         <ToastContainer />
 

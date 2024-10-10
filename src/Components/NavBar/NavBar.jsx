@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { FaRegUserCircle } from "react-icons/fa";
 import { FaBars } from "react-icons/fa6";
@@ -6,6 +6,9 @@ import { FaBars } from "react-icons/fa6";
 const NavBar = () => {
     const [dropdownOpen2, setDropdownOpen2] = useState(false);
     const [dropdownOpen1, setDropdownOpen1] = useState(false);
+
+    const dropdown1Ref = useRef(null);
+    const dropdown2Ref = useRef(null);
 
     const toggleDropdown1 = () => {
         setDropdownOpen1(!dropdownOpen1);
@@ -15,12 +18,28 @@ const NavBar = () => {
         setDropdownOpen2(!dropdownOpen2);
     };
 
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdown1Ref.current && !dropdown1Ref.current.contains(event.target)) {
+                setDropdownOpen1(false);
+            }
+            if (dropdown2Ref.current && !dropdown2Ref.current.contains(event.target)) {
+                setDropdownOpen2(false);
+            }
+        };
+
+        document.addEventListener('click', handleClickOutside);
+        return () => {
+            document.removeEventListener('click', handleClickOutside);
+        };
+    }, []);
+
     return (
         <div>
             <div className="navbar bg-base-100 mt-4 lg:mt-10 items-center Work-Sans shadow-[rgba(0,0,0,0.1)_0px_2px_2px]">
 
                 <div className="navbar-start">
-                    <div className="dropdown flex lg:hidden">
+                    <div className="dropdown flex lg:hidden" ref={dropdown1Ref}>
                         <div className="relative">
                             <div onClick={toggleDropdown1} className="cursor-pointer btn btn-ghost">
                                 <FaBars size={24} />
@@ -32,9 +51,11 @@ const NavBar = () => {
                                         <NavLink to={'/'} className="block py-2 border-b hover:bg-gray-100">
                                             Home
                                         </NavLink>
-                                        <NavLink to={'/listedbooks'} className="block py-2 border-b hover:bg-gray-100">
+
+                                        <NavLink to={'/listedbooks/readsbook'} className="block py-2 border-b hover:bg-gray-100">
                                             Listed Books
                                         </NavLink>
+
                                         <NavLink to={'/pagestoread'} className="block py-2 hover:bg-gray-100">
                                             Pages to Read
                                         </NavLink>
@@ -57,6 +78,7 @@ const NavBar = () => {
                                 }`
                             }
                             to={'/'}>Home</NavLink>
+
                         <NavLink
                             className={({ isActive }) =>
                                 `${isActive
@@ -64,7 +86,11 @@ const NavBar = () => {
                                     : 'text-black opacity-60 py-2 px-4 rounded border border-transparent hover:bg-gray-200 hover:border-black'
                                 }`
                             }
-                            to={'/listedbooks'}>Listed Books</NavLink>
+                            to={`/listedbooks/readsbook`}>Listed Books
+                        </NavLink>
+
+
+
                         <NavLink
                             className={({ isActive }) =>
                                 `${isActive
@@ -75,6 +101,7 @@ const NavBar = () => {
                             to="/pagestoread">
                             Pages to Read
                         </NavLink>
+
                     </ul>
                 </div>
 
@@ -88,7 +115,7 @@ const NavBar = () => {
                         </NavLink>
                     </div>
 
-                    <div className='flex lg:hidden'>
+                    <div className='flex lg:hidden' ref={dropdown2Ref}>
                         <div className="relative">
                             <div onClick={toggleDropdown2} className="cursor-pointer btn btn-ghost">
                                 <FaRegUserCircle size={24} />

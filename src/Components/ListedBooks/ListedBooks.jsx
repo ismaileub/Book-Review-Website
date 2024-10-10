@@ -4,6 +4,10 @@ import { NavLink, Outlet } from 'react-router-dom';
 const ListedBooks = () => {
     const [sortOption, setSortOption] = useState('');
 
+
+
+
+
     const handleSortChange = (option) => {
         setSortOption(option);
     };
@@ -25,18 +29,28 @@ const ListedBooks = () => {
 
             <div className='mb-10'>
                 <div className="flex Work-Sans overflow-y-hidden items-center -mx-4 flex-nowrap dark:bg-gray-100 dark:text-gray-800">
+
+
+
                     <NavLink to={'/listedbooks/readsbook'} className={({ isActive }) => `${isActive ? 'border border-b-0 rounded-t' : 'border-b'} flex items-center flex-shrink-0 px-5 py-3 space-x-2 dark:border-gray-600 dark:text-gray-600`}>
                         Read Books
                     </NavLink>
-                    <NavLink to={'/listedbooks/wishlistbooks'} className={({ isActive }) => `${isActive ? 'border border-b-0 rounded-t' : 'border-b'} flex items-center flex-shrink-0 px-5 py-3 space-x-2 dark:border-gray-600 dark:text-gray-600`}>
+
+                    <NavLink to={'/listedbooks/wishlistbooks'} className={({ isActive }) => `${isActive
+                        ?
+                        'border border-b-0 rounded-t'
+                        :
+                        'border-b'} flex items-center flex-shrink-0 px-5 py-3 space-x-2 dark:border-gray-600 dark:text-gray-600`}>
                         Wishlist Books
                     </NavLink>
+
                     <div className='border-b py-6 flex-grow'></div>
                 </div>
             </div>
 
             <div>
                 <Outlet context={{ sortOption }} />
+
             </div>
         </div>
     );
